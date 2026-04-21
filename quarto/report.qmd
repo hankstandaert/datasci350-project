@@ -1,0 +1,34 @@
+---
+title: Final Project
+subtitle: Datasci 350
+author: Danilo Freire
+date: 2026-04-21
+format: 
+  html:
+    theme: cosmo
+    embed-resources: true
+editor:
+  render-on-save: true
+---
+
+# Introduction to Our Project
+
+
+```{python}
+print("Hello, world!")
+```
+
+# Data Cleaning
+
+[Link](https://www.emory.edu).
+
+
+
+# Data Analysis
+
+
+
+
+# Conclusion
+
+
