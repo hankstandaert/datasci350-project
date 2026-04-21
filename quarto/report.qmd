@@ -13,9 +13,14 @@ editor:
 
 # Introduction to Our Project
 
-## Code for Data Cleaning Secondary Enrollment
-```{SQL}
-print("Hello, world!")
+## Code for Data Cleaning Enrollment Data
+```{sql}
+
+```
+
+## Code for Data Cleaning Trained Teacher Data
+```{sql}
+
 ```
 
 # Data Cleaning
