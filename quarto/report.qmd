@@ -13,15 +13,43 @@ editor:
 
 # Introduction to Our Project
 
-
-```{python}
+## Code for Data Cleaning Secondary Enrollment
+```{SQL}
 print("Hello, world!")
 ```
 
 # Data Cleaning
 
-[Link](https://www.emory.edu).
+We only included columns 
 
+Africa Eastern and Southern
+AFE
+Africa Western and Central
+AFW
+Arab World
+ARB
+Australia
+AUS
+East Asia & Pacific
+EAS
+European Union
+EUU
+Latin America & Caribbean
+LCN
+North America
+NAC
+South Asia
+SAS
+Low income
+LIC
+Lower middle income
+LMC
+Upper middle income
+UMC
+High income
+HIC
+
+And only years 2000-2023
 
 
 # Data Analysis
