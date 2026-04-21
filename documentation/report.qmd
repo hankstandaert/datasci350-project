@@ -82,7 +82,15 @@ And only years 2000-2023
 
 # Data Analysis
 
+## Correlation Between Percent Enrollment and Percent Trained Teachers
 
+```{python}
+
+```
+
+```{python}
+
+```
 
 
 # Conclusion
