@@ -80,4 +80,6 @@ And only years 2000-2023
 
 # Conclusion
 
+There are certain limitations with our analysis, including the fact that there is missing data for certain years in some of our variables.
+
 
