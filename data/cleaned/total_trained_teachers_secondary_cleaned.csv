@@ -1,0 +1,313 @@
+country_name,country_code,year,trained_teacher
+Africa Eastern and Southern,AFE,2000,
+Africa Eastern and Southern,AFE,2001,
+Africa Eastern and Southern,AFE,2002,
+Africa Eastern and Southern,AFE,2003,
+Africa Eastern and Southern,AFE,2004,
+Africa Eastern and Southern,AFE,2005,
+Africa Eastern and Southern,AFE,2006,
+Africa Eastern and Southern,AFE,2007,
+Africa Eastern and Southern,AFE,2008,
+Africa Eastern and Southern,AFE,2009,69.2460632324219
+Africa Eastern and Southern,AFE,2010,67.3307495117188
+Africa Eastern and Southern,AFE,2011,63.5546607971191
+Africa Eastern and Southern,AFE,2012,63.2099800109863
+Africa Eastern and Southern,AFE,2013,60.9725303649902
+Africa Eastern and Southern,AFE,2014,56.2616500854492
+Africa Eastern and Southern,AFE,2015,56.3119201660156
+Africa Eastern and Southern,AFE,2016,61.4890785217285
+Africa Eastern and Southern,AFE,2017,62.5127410888672
+Africa Eastern and Southern,AFE,2018,66.4320602416992
+Africa Eastern and Southern,AFE,2019,62.2321395874023
+Africa Eastern and Southern,AFE,2020,57.660270690918
+Africa Eastern and Southern,AFE,2021,58.9477806091309
+Africa Eastern and Southern,AFE,2022,
+Africa Eastern and Southern,AFE,2023,
+Africa Western and Central,AFW,2000,
+Africa Western and Central,AFW,2001,
+Africa Western and Central,AFW,2002,81.3520812988281
+Africa Western and Central,AFW,2003,77.4139404296875
+Africa Western and Central,AFW,2004,83.1317901611328
+Africa Western and Central,AFW,2005,79.4016189575195
+Africa Western and Central,AFW,2006,72.2792205810547
+Africa Western and Central,AFW,2007,58.7691307067871
+Africa Western and Central,AFW,2008,53.717170715332
+Africa Western and Central,AFW,2009,53.7646789550781
+Africa Western and Central,AFW,2010,53.4865684509277
+Africa Western and Central,AFW,2011,45.5000686645508
+Africa Western and Central,AFW,2012,56.9589996337891
+Africa Western and Central,AFW,2013,51.701171875
+Africa Western and Central,AFW,2014,58.7505416870117
+Africa Western and Central,AFW,2015,60.1464195251465
+Africa Western and Central,AFW,2016,63.2614707946777
+Africa Western and Central,AFW,2017,63.9641189575195
+Africa Western and Central,AFW,2018,64.058708190918
+Africa Western and Central,AFW,2019,62.707389831543
+Africa Western and Central,AFW,2020,61.4384002685547
+Africa Western and Central,AFW,2021,60.0963706970215
+Africa Western and Central,AFW,2022,58.6279487609863
+Africa Western and Central,AFW,2023,
+Arab World,ARB,2000,
+Arab World,ARB,2001,
+Arab World,ARB,2002,
+Arab World,ARB,2003,
+Arab World,ARB,2004,
+Arab World,ARB,2005,
+Arab World,ARB,2006,
+Arab World,ARB,2007,
+Arab World,ARB,2008,
+Arab World,ARB,2009,
+Arab World,ARB,2010,
+Arab World,ARB,2011,
+Arab World,ARB,2012,
+Arab World,ARB,2013,
+Arab World,ARB,2014,
+Arab World,ARB,2015,82.4288482666016
+Arab World,ARB,2016,82.1020584106445
+Arab World,ARB,2017,84.5305404663086
+Arab World,ARB,2018,86.6735687255859
+Arab World,ARB,2019,86.6251525878906
+Arab World,ARB,2020,84.9144668579102
+Arab World,ARB,2021,86.5154800415039
+Arab World,ARB,2022,89.1370391845703
+Arab World,ARB,2023,83.607536315918
+Australia,AUS,2000,
+Australia,AUS,2001,
+Australia,AUS,2002,
+Australia,AUS,2003,
+Australia,AUS,2004,
+Australia,AUS,2005,
+Australia,AUS,2006,
+Australia,AUS,2007,
+Australia,AUS,2008,
+Australia,AUS,2009,
+Australia,AUS,2010,
+Australia,AUS,2011,
+Australia,AUS,2012,
+Australia,AUS,2013,
+Australia,AUS,2014,
+Australia,AUS,2015,
+Australia,AUS,2016,
+Australia,AUS,2017,
+Australia,AUS,2018,
+Australia,AUS,2019,
+Australia,AUS,2020,
+Australia,AUS,2021,
+Australia,AUS,2022,
+Australia,AUS,2023,
+East Asia & Pacific,EAS,2000,
+East Asia & Pacific,EAS,2001,
+East Asia & Pacific,EAS,2002,
+East Asia & Pacific,EAS,2003,
+East Asia & Pacific,EAS,2004,
+East Asia & Pacific,EAS,2005,
+East Asia & Pacific,EAS,2006,
+East Asia & Pacific,EAS,2007,
+East Asia & Pacific,EAS,2008,
+East Asia & Pacific,EAS,2009,
+East Asia & Pacific,EAS,2010,
+East Asia & Pacific,EAS,2011,
+East Asia & Pacific,EAS,2012,
+East Asia & Pacific,EAS,2013,
+East Asia & Pacific,EAS,2014,
+East Asia & Pacific,EAS,2015,
+East Asia & Pacific,EAS,2016,
+East Asia & Pacific,EAS,2017,
+East Asia & Pacific,EAS,2018,
+East Asia & Pacific,EAS,2019,
+East Asia & Pacific,EAS,2020,
+East Asia & Pacific,EAS,2021,
+East Asia & Pacific,EAS,2022,
+East Asia & Pacific,EAS,2023,
+European Union,EUU,2000,
+European Union,EUU,2001,
+European Union,EUU,2002,
+European Union,EUU,2003,
+European Union,EUU,2004,
+European Union,EUU,2005,
+European Union,EUU,2006,
+European Union,EUU,2007,
+European Union,EUU,2008,
+European Union,EUU,2009,
+European Union,EUU,2010,
+European Union,EUU,2011,
+European Union,EUU,2012,
+European Union,EUU,2013,
+European Union,EUU,2014,
+European Union,EUU,2015,
+European Union,EUU,2016,
+European Union,EUU,2017,
+European Union,EUU,2018,
+European Union,EUU,2019,
+European Union,EUU,2020,
+European Union,EUU,2021,
+European Union,EUU,2022,
+European Union,EUU,2023,
+High income,HIC,2000,
+High income,HIC,2001,
+High income,HIC,2002,
+High income,HIC,2003,
+High income,HIC,2004,
+High income,HIC,2005,
+High income,HIC,2006,
+High income,HIC,2007,
+High income,HIC,2008,
+High income,HIC,2009,93.6299591064453
+High income,HIC,2010,93.8007736206055
+High income,HIC,2011,93.9835510253906
+High income,HIC,2012,94.1225280761719
+High income,HIC,2013,95.2091369628906
+High income,HIC,2014,95.3305816650391
+High income,HIC,2015,94.5462875366211
+High income,HIC,2016,93.5049133300781
+High income,HIC,2017,93.2310104370117
+High income,HIC,2018,92.3420333862305
+High income,HIC,2019,91.7518768310547
+High income,HIC,2020,91.503288269043
+High income,HIC,2021,89.7136001586914
+High income,HIC,2022,87.8444976806641
+High income,HIC,2023,87.2409133911133
+Latin America & Caribbean,LCN,2000,
+Latin America & Caribbean,LCN,2001,
+Latin America & Caribbean,LCN,2002,
+Latin America & Caribbean,LCN,2003,
+Latin America & Caribbean,LCN,2004,
+Latin America & Caribbean,LCN,2005,
+Latin America & Caribbean,LCN,2006,
+Latin America & Caribbean,LCN,2007,83.0105590820312
+Latin America & Caribbean,LCN,2008,
+Latin America & Caribbean,LCN,2009,
+Latin America & Caribbean,LCN,2010,
+Latin America & Caribbean,LCN,2011,77.9215774536133
+Latin America & Caribbean,LCN,2012,79.3628005981445
+Latin America & Caribbean,LCN,2013,77.5350494384766
+Latin America & Caribbean,LCN,2014,77.9082717895508
+Latin America & Caribbean,LCN,2015,78.7891311645508
+Latin America & Caribbean,LCN,2016,79.2888565063477
+Latin America & Caribbean,LCN,2017,80.4045104980469
+Latin America & Caribbean,LCN,2018,80.4953231811523
+Latin America & Caribbean,LCN,2019,79.8498916625977
+Latin America & Caribbean,LCN,2020,80.1438217163086
+Latin America & Caribbean,LCN,2021,80.4881896972656
+Latin America & Caribbean,LCN,2022,76.9158172607422
+Latin America & Caribbean,LCN,2023,75.8703079223633
+Low income,LIC,2000,
+Low income,LIC,2001,
+Low income,LIC,2002,
+Low income,LIC,2003,
+Low income,LIC,2004,
+Low income,LIC,2005,
+Low income,LIC,2006,
+Low income,LIC,2007,
+Low income,LIC,2008,
+Low income,LIC,2009,58.8206901550293
+Low income,LIC,2010,57.533130645752
+Low income,LIC,2011,54.7438697814941
+Low income,LIC,2012,54.0196914672852
+Low income,LIC,2013,55.4375114440918
+Low income,LIC,2014,56.0863914489746
+Low income,LIC,2015,58.2177581787109
+Low income,LIC,2016,59.2665100097656
+Low income,LIC,2017,60.3431091308594
+Low income,LIC,2018,63.8026695251465
+Low income,LIC,2019,59.7304000854492
+Low income,LIC,2020,54.9352416992188
+Low income,LIC,2021,55.6172904968262
+Low income,LIC,2022,
+Low income,LIC,2023,
+Lower middle income,LMC,2000,
+Lower middle income,LMC,2001,
+Lower middle income,LMC,2002,
+Lower middle income,LMC,2003,
+Lower middle income,LMC,2004,
+Lower middle income,LMC,2005,
+Lower middle income,LMC,2006,
+Lower middle income,LMC,2007,
+Lower middle income,LMC,2008,
+Lower middle income,LMC,2009,
+Lower middle income,LMC,2010,
+Lower middle income,LMC,2011,
+Lower middle income,LMC,2012,
+Lower middle income,LMC,2013,
+Lower middle income,LMC,2014,
+Lower middle income,LMC,2015,
+Lower middle income,LMC,2016,78.6634292602539
+Lower middle income,LMC,2017,78.9544067382812
+Lower middle income,LMC,2018,83.9190292358398
+Lower middle income,LMC,2019,78.2345962524414
+Lower middle income,LMC,2020,80.4521636962891
+Lower middle income,LMC,2021,84.4981536865234
+Lower middle income,LMC,2022,83.0873794555664
+Lower middle income,LMC,2023,81.9054489135742
+North America,NAC,2000,99.875129699707
+North America,NAC,2001,99.8661117553711
+North America,NAC,2002,99.8713912963867
+North America,NAC,2003,99.4882736206055
+North America,NAC,2004,99.8492965698242
+North America,NAC,2005,99.6681137084961
+North America,NAC,2006,99.8473587036133
+North America,NAC,2007,99.4856567382812
+North America,NAC,2008,99.4457168579102
+North America,NAC,2009,99.4233627319336
+North America,NAC,2010,99.3839721679688
+North America,NAC,2011,99.382080078125
+North America,NAC,2012,99.3589706420898
+North America,NAC,2013,99.6316070556641
+North America,NAC,2014,99.6436004638672
+North America,NAC,2015,99.6040496826172
+North America,NAC,2016,99.452751159668
+North America,NAC,2017,99.5348815917969
+North America,NAC,2018,99.4796981811523
+North America,NAC,2019,99.4964065551758
+North America,NAC,2020,99.4897384643555
+North America,NAC,2021,99.0835876464844
+North America,NAC,2022,98.658447265625
+North America,NAC,2023,98.5651321411133
+South Asia,SAS,2000,
+South Asia,SAS,2001,
+South Asia,SAS,2002,
+South Asia,SAS,2003,
+South Asia,SAS,2004,
+South Asia,SAS,2005,
+South Asia,SAS,2006,
+South Asia,SAS,2007,
+South Asia,SAS,2008,
+South Asia,SAS,2009,
+South Asia,SAS,2010,
+South Asia,SAS,2011,
+South Asia,SAS,2012,
+South Asia,SAS,2013,
+South Asia,SAS,2014,
+South Asia,SAS,2015,
+South Asia,SAS,2016,77.0933303833008
+South Asia,SAS,2017,76.1173782348633
+South Asia,SAS,2018,84.9090423583984
+South Asia,SAS,2019,74.6538696289062
+South Asia,SAS,2020,79.0918502807617
+South Asia,SAS,2021,87.4228591918945
+South Asia,SAS,2022,87.7593765258789
+South Asia,SAS,2023,89.1398696899414
+Upper middle income,UMC,2000,
+Upper middle income,UMC,2001,
+Upper middle income,UMC,2002,
+Upper middle income,UMC,2003,
+Upper middle income,UMC,2004,
+Upper middle income,UMC,2005,
+Upper middle income,UMC,2006,
+Upper middle income,UMC,2007,
+Upper middle income,UMC,2008,
+Upper middle income,UMC,2009,
+Upper middle income,UMC,2010,
+Upper middle income,UMC,2011,
+Upper middle income,UMC,2012,
+Upper middle income,UMC,2013,
+Upper middle income,UMC,2014,
+Upper middle income,UMC,2015,
+Upper middle income,UMC,2016,
+Upper middle income,UMC,2017,
+Upper middle income,UMC,2018,
+Upper middle income,UMC,2019,
+Upper middle income,UMC,2020,
+Upper middle income,UMC,2021,
+Upper middle income,UMC,2022,81.0041427612305
+Upper middle income,UMC,2023,
