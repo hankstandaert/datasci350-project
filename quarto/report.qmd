@@ -1,0 +1,100 @@
+---
+title: Final Project
+subtitle: Datasci 350
+author: Hank, Ayushi, Jacob, 
+date: 2026-04-21
+format: 
+  html:
+    theme: cosmo
+    embed-resources: true
+editor:
+  render-on-save: true
+---
+
+# Introduction to Our Project
+This project examines global education patterns using data from the World Bank’s World Development Indicators (WDI), with a focus on school enrollment across primary, secondary, and tertiary levels. Rather than analyzing individual countries, the study compares aggregated regional and income-based groupings provided by the World Bank, allowing for a broader and more structured analysis of global education systems. The analysis includes gender-disaggregated enrollment data and measures of trained teachers to provide a multidimensional view of education.
+
+Education is a key driver of economic development, human capital formation, and long-term growth. While enrollment rates provide an important measure of access to schooling, they do not fully capture the effectiveness or equity of education systems. Gender differences in enrollment can reveal persistent inequalities in access, while the proportion of trained teachers reflects the quality of education systems. Examining these factors across both regional and income-based groupings allows for a more systematic understanding of how development levels relate to enrollment.
+
+This analysis is guided by two primary research questions. First, how do male and female enrollment rates differ across global regions and income groups from 2000 to 2020, and how do these differences vary across levels of education? Second, how does the proportion of trained teachers in secondary education vary across these groupings, and what patterns emerge when comparing teacher preparedness with enrollment levels?
+
+To address these questions, we construct a dataset from multiple WDI education indicators and apply a series of data cleaning and preprocessing steps to ensure consistency across regions, income groups, and years. 
+
+
+# Data Description
+
+The dataset used in this project is drawn from the World Bank’s World Development Indicators (WDI), which contains over 1,600 indicators across more than 200 countries and territories from 1960 to 2023. In addition to country-level data, the WDI provides pre-aggregated indicators for regional groupings (e.g., East Asia & Pacific, Europe & Central Asia) and income-based groupings. This project focuses on these aggregated regional and income categories rather than individual countries.
+
+The analysis uses a subset of education-related indicators, including school enrollment rates at the primary, secondary, and tertiary levels, gender-disaggregated enrollment measures, and the proportion of trained teachers. These indicators are selected to capture key dimensions of education systems, including access to schooling, equity across gender, and the quality of instruction.
+
+To ensure consistency and comparability, the dataset is restricted to selected regional and income groupings and to the time period from 2000 to 2020. This time window is chosen to maximize data availability across all variables, particularly for trained teacher indicators, which are less consistently reported in earlier years.
+
+<<<<<<< HEAD
+
+## Code for Data Cleaning Enrollment Data
+```{sql}
+
+```
+
+## Code for Data Cleaning Trained Teacher Data
+```{sql}
+
+=======
+## Code for Data Cleaning Secondary Enrollment
+```{SQL}
+print("Hello, world!")
+>>>>>>> 04ceef90c54704dc9f5fb60fe5ce54b68dfe4a39
+```
+
+# Data Cleaning
+
+We only included columns 
+
+Africa Eastern and Southern
+AFE
+Africa Western and Central
+AFW
+Arab World
+ARB
+Australia
+AUS
+East Asia & Pacific
+EAS
+European Union
+EUU
+Latin America & Caribbean
+LCN
+North America
+NAC
+South Asia
+SAS
+Low income
+LIC
+Lower middle income
+LMC
+Upper middle income
+UMC
+High income
+HIC
+
+And only years 2000-2023
+
+
+# Data Analysis
+
+## Correlation Between Percent Enrollment and Percent Trained Teachers
+
+```{python}
+
+```
+
+```{python}
+
+```
+
+
+# Conclusion
+
+There are certain limitations with our analysis, including the fact that there is missing data for certain years in some of our variables.
+
+
