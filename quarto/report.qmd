@@ -293,22 +293,22 @@ Trained Teachers EDA & Description
 
 After assessing the structure of the dataset and the extent of missing values, the data was restricted to observations from 2000 to 2023 and to the selected regional and income-group country codes: AFE, AFW, ARB, AUS, EAS, EUU, HIC, LCN, LIC, LMC, NAC, SAS, and UMC. The preliminary data file was in wide format, with each year stored in a separate column, which made it difficult to navigate and analyze. It was therefore reshaped into long format with the variables country_name, country_code, year, and trained_teacher. The cleaning and reshaping were completed in SQLite through Python, and the final cleaned file contained 312 country-year observations.
 
-[Insert Figure 1 here: table or screenshot showing the cleaned long-format structure]
-/Users/a13015/Final_Project/datasci350-project/figures/trained_teacher_trained_structure.png
+![](../figures/trained_teacher_trained_structure.png)
 
 A key feature of the dataset was the large number of missing data points, which motivated the selection of the variables and country groups described above. Of the 312 total observations, only 126 contained non-missing values for trained_teacher, so the descriptive analysis was based only on available observations. The cleaned dataset still included all 13 target country codes, even though some countries and years did not report a value.
 
-[Insert Figure 2 here: missingness summary showing total observations versus non-missing trained_teacher observations]
+![](../figures/trained_teacher_missing.png)
 
 The exploratory analysis focused primarily on the distribution and temporal pattern of trained teacher percentages. The histogram shows a bimodal distribution, with values concentrated mostly between about 55 and 100 percent and heavier clustering toward the upper end. The mean was 78.67, and the median was 80.43. Because the mean is slightly lower than the median, the distribution appears mildly left-skewed, suggesting that a few lower values pull the mean downward.
 
 [Insert Figure 3 here: histogram of trained_teacher with mean and median lines]
+![](../figures/trained_teacher_histogram.png)
 
 The time-series plot showed substantial variation over time and no clear linear trend. The yearly mean declined from the early 2000s into the early 2010s, then gradually recovered in later years. The yearly median followed a similar pattern, although it sometimes fell above or below the mean, suggesting that the cross-country distribution was uneven and occasionally skewed within individual years. The spread of points across years also indicates considerable variation across regions and income groups rather than a uniform global pattern.
 
 [Insert Figure 4 here: time-series scatterplot with yearly mean and median lines]
 
-
+![](../figures/trained_teacher_trend.png)
 
 # Data Analysis
 
