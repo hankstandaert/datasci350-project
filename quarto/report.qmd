@@ -7,7 +7,7 @@ author:
   - "Ryana Rajesh (2549737)"
   - "Chau Anh Nguyen (2575963)"
   - "Jacob Hillman (2580176)"
-date: "2026-04-26"
+date: "2026-04-27"
 format: 
   html:
     theme: cosmo
@@ -29,7 +29,7 @@ This project examines global education patterns using data from the World Bank's
 
 Education is a key driver of economic development, human capital formation, and long-term growth. While enrollment rates provide an important measure of access to schooling, they do not fully capture the effectiveness or equity of education systems. Gender differences in enrollment can reveal persistent inequalities in access, while the proportion of trained teachers reflects the quality of education systems. Examining these factors across both regional and income-based groupings allows for a more systematic understanding of how development levels relate to enrollment.
 
-This analysis is guided by two primary research questions. First, how do male and female enrollment rates differ across global regions and income groups from 2000 to 2020, and how do these differences vary across levels of education? Second, how does the proportion of trained teachers in secondary education vary across these groupings, and what patterns emerge when comparing teacher preparedness with enrollment levels?
+This analysis is guided by two primary research questions. First, how do male and female enrollment rates differ across global regions and income groups from 2000 to 2023, and how do these differences vary across levels of education? Second, how does the proportion of trained teachers in secondary education relate to enrollment levels across these groupings?
 
 To address these questions, we construct a dataset from multiple WDI education indicators and apply a series of data cleaning and preprocessing steps to ensure consistency across regions, income groups, and years.
 
@@ -39,7 +39,7 @@ The dataset used in this project is drawn from the World Bank's World Developmen
 
 The analysis uses a subset of education-related indicators, including school enrollment rates at the primary, secondary, and tertiary levels, gender-disaggregated enrollment measures, and the proportion of trained teachers. These indicators are selected to capture key dimensions of education systems, including access to schooling, equity across gender, and the quality of instruction.
 
-To ensure consistency and comparability, the dataset is restricted to selected regional and income groupings and to the time period from 2000 to 2020. This time window is chosen to maximize data availability across all variables, particularly for trained teacher indicators, which are less consistently reported in earlier years.
+To ensure consistency and comparability, the dataset is restricted to selected regional and income groupings and to the time period from 2000 to 2023.
 
 ## Regions and Income Groups
 
@@ -72,19 +72,14 @@ Enrollment data for primary, secondary, and tertiary levels was downloaded separ
 import pandas as pd
 import sqlite3
 
-# Connect to SQLite database
 conn = sqlite3.connect("data/education.db")
 
-# Load raw secondary female enrollment data
 df_female = pd.read_csv(
     "data/raw/enrollment/SECONDARY_Female_School_Enrollment_DATA.csv",
     skiprows=4
 )
-
-# Load into SQLite
 df_female.to_sql("secondary_female_raw", conn, if_exists="replace", index=False)
 
-# Filter to target regions and select years 2000-2023
 conn.executescript("""
 CREATE TABLE secondary_female_clean AS
 SELECT
@@ -100,7 +95,6 @@ WHERE "Country Code" IN (
 );
 """)
 
-# Merge male and female long-format tables
 conn.executescript("""
 DROP TABLE IF EXISTS secondary_gender_merged;
 CREATE TABLE secondary_gender_merged AS
@@ -116,30 +110,134 @@ JOIN female_long_sql f
     AND m.year = f.year;
 """)
 
-# Export final merged table to CSV
 df = pd.read_sql("SELECT * FROM secondary_gender_merged;", conn)
 df.to_csv("data/cleaned/secondary_gender_merged.csv", index=False)
 ```
 
 ## Data Cleaning — Trained Teacher Data
 
-After assessing the structure of the dataset and the extent of missing values, the data was restricted to observations from 2000 to 2023 and to the selected regional and income-group country codes: AFE, AFW, ARB, AUS, EAS, EUU, HIC, LCN, LIC, LMC, NAC, SAS, and UMC. The preliminary data file was in wide format, with each year stored in a separate column, which made it difficult to navigate and analyze. It was therefore reshaped into long format with the variables country_name, country_code, year, and trained_teacher. The cleaning and reshaping were completed in SQLite through Python, and the final cleaned file contained 312 country-year observations.
+After assessing the structure of the dataset and the extent of missing values, the data was restricted to observations from 2000 to 2023 and to the selected regional and income-group country codes. The preliminary data file was in wide format and was reshaped into long format with the variables country_name, country_code, year, and trained_teacher using SQLite in Python. The final cleaned file contained 312 country-year observations, of which only 126 had non-missing values for trained_teacher.
 
 ![Cleaned long-format structure of the trained teacher dataset](../figures/trained_teacher_trained_structure.png)
 
-A key feature of the dataset was the large number of missing data points, which motivated the selection of the variables and country groups described above. Of the 312 total observations, only 126 contained non-missing values for trained_teacher, so the descriptive analysis was based only on available observations. The cleaned dataset still included all 13 target country codes, even though some countries and years did not report a value.
-
 ![Summary of missing values in the trained teacher dataset](../figures/trained_teacher_missing.png)
 
-The exploratory analysis focused primarily on the distribution and temporal pattern of trained teacher percentages. The histogram shows a bimodal distribution, with values concentrated mostly between about 55 and 100 percent and heavier clustering toward the upper end. The mean was 78.67, and the median was 80.43. Because the mean is slightly lower than the median, the distribution appears mildly left-skewed, suggesting that a few lower values pull the mean downward.
+The histogram of trained teacher percentages shows a distribution concentrated mostly between 55 and 100 percent, with heavier clustering toward the upper end. The mean was 78.67 and the median was 80.43, indicating a mild left skew. The time-series plot showed no clear linear trend — the yearly mean declined from the early 2000s into the early 2010s before recovering in later years.
 
 ![Histogram of trained teacher percentages with mean and median lines](../figures/trained_teacher_histogram.png)
-
-The time-series plot showed substantial variation over time and no clear linear trend. The yearly mean declined from the early 2000s into the early 2010s, then gradually recovered in later years. The yearly median followed a similar pattern, although it sometimes fell above or below the mean, suggesting that the cross-country distribution was uneven and occasionally skewed within individual years. The spread of points across years also indicates considerable variation across regions and income groups rather than a uniform global pattern.
 
 ![Time-series of trained teacher percentages by year](../figures/trained_teacher_trend.png)
 
 # Data Analysis
+
+## SQL Exploratory Data Analysis
+
+Before conducting the full analysis, we used SQL queries via SQLite in Python to compute descriptive statistics across all three education levels combined.
+
+```{python}
+#| echo: true
+#| eval: false
+
+import pandas as pd
+import sqlite3
+
+conn = sqlite3.connect(":memory:")
+df_total.to_sql("all_enrollment", conn, index=False, if_exists="replace")
+
+# Average male and female enrollment by level
+pd.read_sql("""
+SELECT level,
+       AVG(male) AS avg_male,
+       AVG(female) AS avg_female
+FROM all_enrollment
+GROUP BY level;
+""", conn)
+
+# Gender gap by level
+pd.read_sql("""
+SELECT level,
+       AVG(female - male) AS gender_gap
+FROM all_enrollment
+GROUP BY level;
+""", conn)
+```
+
+The SQL queries reveal clear differences across education levels. At the primary level, average male enrollment (101.45%) slightly exceeds female enrollment (98.45%), producing a small average gender gap of -3.01 percentage points (female minus male). At the secondary level, average male enrollment (75.21%) again slightly exceeds female (72.99%), with an average gap of -2.22 points. At the tertiary level, the pattern reverses — female enrollment (41.57%) substantially exceeds male enrollment (34.91%), with an average gap of +6.65 percentage points in favor of females.
+
+### Enrollment Percentage Change from 2000 to 2023
+
+We also computed the percentage change in male and female enrollment from 2000 to 2023 for each region and education level using SQL.
+
+```{python}
+#| echo: true
+#| eval: false
+
+# Primary Enrollment Percentage Change from 2000 to 2023
+pd.read_sql("""
+SELECT
+    country_code,
+    ROUND(
+        (MAX(CASE WHEN year = '2023' THEN male END) -
+         MAX(CASE WHEN year = '2000' THEN male END)) * 100.0 /
+         MAX(CASE WHEN year = '2000' THEN male END), 2
+    ) AS male_pct_change,
+    ROUND(
+        (MAX(CASE WHEN year = '2023' THEN female END) -
+         MAX(CASE WHEN year = '2000' THEN female END)) * 100.0 /
+         MAX(CASE WHEN year = '2000' THEN female END), 2
+    ) AS female_pct_change
+FROM all_enrollment
+WHERE level = 'primary'
+GROUP BY country_code
+ORDER BY female_pct_change DESC;
+""", conn)
+
+# Secondary Enrollment Percentage Change from 2000 to 2023
+pd.read_sql("""
+SELECT
+    country_code,
+    ROUND(
+        (MAX(CASE WHEN year = '2023' THEN male END) -
+         MAX(CASE WHEN year = '2000' THEN male END)) * 100.0 /
+         MAX(CASE WHEN year = '2000' THEN male END), 2
+    ) AS male_pct_change,
+    ROUND(
+        (MAX(CASE WHEN year = '2023' THEN female END) -
+         MAX(CASE WHEN year = '2000' THEN female END)) * 100.0 /
+         MAX(CASE WHEN year = '2000' THEN female END), 2
+    ) AS female_pct_change
+FROM all_enrollment
+WHERE level = 'secondary'
+GROUP BY country_code
+ORDER BY female_pct_change DESC;
+""", conn)
+
+# Tertiary Enrollment Percentage Change from 2000 to 2023
+pd.read_sql("""
+SELECT
+    country_code,
+    ROUND(
+        (MAX(CASE WHEN year = '2023' THEN male END) -
+         MAX(CASE WHEN year = '2000' THEN male END)) * 100.0 /
+         MAX(CASE WHEN year = '2000' THEN male END), 2
+    ) AS male_pct_change,
+    ROUND(
+        (MAX(CASE WHEN year = '2023' THEN female END) -
+         MAX(CASE WHEN year = '2000' THEN female END)) * 100.0 /
+         MAX(CASE WHEN year = '2000' THEN female END), 2
+    ) AS female_pct_change
+FROM all_enrollment
+WHERE level = 'tertiary'
+GROUP BY country_code
+ORDER BY female_pct_change DESC;
+""", conn)
+```
+
+At the primary level, the largest female enrollment gains occurred in low-income regions — Low income (LIC) saw a 54.01% increase in female enrollment compared to 29.87% for males. Africa Eastern & Southern (AFE) saw a 34.71% female increase versus 22.20% for males, and Africa Western & Central (AFW) saw a 24.95% female increase versus only 3.26% for males. High-income regions saw small declines, consistent with already near-universal enrollment.
+
+At the secondary level, AFW saw a 145.51% increase in female secondary enrollment versus 81.01% for males — the fastest female growth of any region. South Asia (SAS) saw a 93.69% female increase versus 43.33% for males. High-income regions saw much smaller gains of around 2–5% for both genders.
+
+At the tertiary level, growth was dramatic across all regions. Upper middle income (UMC) saw female enrollment grow by 365.86% compared to 273.87% for males. South Asia saw female tertiary enrollment grow by 359.01% versus 187.65% for males. Even high-income regions saw substantial female tertiary growth — North America grew 27.16% for females versus 17.52% for males. These results confirm that female tertiary enrollment has been growing faster than male across virtually every region.
 
 ## RQ1: Male vs. Female Enrollment Across Regions and Education Levels
 
@@ -159,19 +257,16 @@ ROOT = Path.cwd().parent
 DATA_DIR = ROOT / "data" / "cleaned"
 FIG_DIR = ROOT / "figures"
 
-# Load cleaned merged datasets for all three levels
 primary = pd.read_csv(DATA_DIR / "primary_gender_merged.csv")
 secondary = pd.read_csv(DATA_DIR / "secondary_gender_merged.csv")
 tertiary = pd.read_csv(DATA_DIR / "tertiary_gender_merged.csv")
 
-# Convert columns to numeric and compute gender gap
 for df in [primary, secondary, tertiary]:
     df["year"] = pd.to_numeric(df["year"], errors="coerce")
     df["male_enrollment"] = pd.to_numeric(df["male_enrollment"], errors="coerce")
     df["female_enrollment"] = pd.to_numeric(df["female_enrollment"], errors="coerce")
     df["gender_gap"] = df["male_enrollment"] - df["female_enrollment"]
 
-# Add level labels and combine into one dataframe
 primary["level"] = "Primary"
 secondary["level"] = "Secondary"
 tertiary["level"] = "Tertiary"
@@ -180,7 +275,7 @@ combined = pd.concat([primary, secondary, tertiary], ignore_index=True)
 
 ### Primary Enrollment
 
-At the primary level, male gross enrollment has consistently exceeded female enrollment across the study period, though the gap has narrowed significantly. In 2000, the gender gap was approximately 7 percentage points, with male enrollment near 100% and female enrollment around 93%. The gap declined steadily through 2016, reaching a low of about 0.6 percentage points, before stabilizing at roughly 1.5 points by 2023. Both rates peaked around 2007–2008 before slightly declining, likely reflecting data reporting patterns across regions.
+At the primary level, male gross enrollment has consistently exceeded female enrollment, though the gap has narrowed significantly. In 2000, the gender gap was approximately 7 percentage points, with male enrollment near 100% and female enrollment around 93%. The gap declined steadily through 2016, reaching a low of about 0.6 percentage points, before stabilizing at roughly 1.5 points by 2023.
 
 ![Primary school enrollment trends by gender (2000–2023)](../figures/primary_gender_trends.png)
 
@@ -188,7 +283,7 @@ At the primary level, male gross enrollment has consistently exceeded female enr
 
 ### Secondary Enrollment
 
-Secondary enrollment shows strong growth for both genders over the entire period. Male enrollment rose from approximately 63% in 2000 to around 83% by 2023, while female enrollment grew from roughly 59% to nearly 90%, with a sharp increase in the most recent years. The gender gap started at about 3.8 percentage points in 2000 and has steadily declined, dipping below zero by 2023 — meaning female secondary enrollment has now slightly surpassed male enrollment globally.
+Secondary enrollment shows strong growth for both genders. Male enrollment rose from approximately 63% in 2000 to around 83% by 2023, while female enrollment grew from roughly 59% to nearly 90%. The gender gap started at about 3.8 percentage points in 2000 and declined steadily, dipping below zero by 2023 — meaning female secondary enrollment has now slightly surpassed male enrollment globally.
 
 ![Secondary school enrollment trends by gender (2000–2023)](../figures/secondary_gender_trends.png)
 
@@ -196,7 +291,7 @@ Secondary enrollment shows strong growth for both genders over the entire period
 
 ### Tertiary Enrollment
 
-At the tertiary level, female enrollment has exceeded male enrollment throughout the entire study period and the gap has been widening rapidly. In 2000, the gap was already about -2 percentage points (females ahead), with both genders at around 23–25%. By 2023, female enrollment reached approximately 71% compared to male enrollment of around 56%, with the gap widening to nearly -16 percentage points — the largest gender disparity of any education level.
+At the tertiary level, female enrollment has exceeded male enrollment throughout the entire study period and the gap has been widening rapidly. In 2000, the gap was already about -2 percentage points (females ahead), with both genders at around 23–25%. By 2023, female enrollment reached approximately 71% compared to male enrollment of around 56%, with the gap widening to nearly -16 percentage points.
 
 ![Tertiary school enrollment trends by gender (2000–2023)](../figures/tertiary_gender_trends.png)
 
@@ -204,7 +299,7 @@ At the tertiary level, female enrollment has exceeded male enrollment throughout
 
 ### Gender Gap Across All Education Levels
 
-When comparing all three levels together, a clear divergence emerges. Primary and secondary gaps started positive (male higher) and have converged toward zero over time. The tertiary gap, already negative in 2000, has accelerated downward to about -15 percentage points by 2023, driven by rapidly rising female tertiary enrollment globally. This suggests that while gender disparities in access to basic education are narrowing, a new and growing gap has emerged at the tertiary level in favor of women.
+When comparing all three levels together, primary and secondary gaps started positive and have converged toward zero, while the tertiary gap has accelerated downward to about -15 percentage points by 2023. This suggests that while gender disparities in basic education are narrowing, a new and growing gap has emerged at the tertiary level in favor of women.
 
 ![Gender gap across all education levels](../figures/gender_gap_by_level.png)
 
@@ -214,9 +309,7 @@ When comparing all three levels together, a clear divergence emerges. Primary an
 
 ### Regional Breakdown — Tertiary Enrollment (2023)
 
-The regional bar charts reveal substantial variation across regions. For female tertiary enrollment in 2023, Australia leads at over 125%, followed by North America (~97%), High income (~91%), and the European Union (~89%). South Asia (~33%), Arab World (~35%), and Lower middle income groups (~27%) have the lowest female tertiary enrollment.
-
-For the tertiary gender gap in 2023, nearly all regions show negative values meaning females outenroll males. Australia has the largest female advantage at about -40 percentage points, followed by North America (~-30) and Latin America & Caribbean (~-19). South Asia and Lower middle income are the only groups near zero, indicating these regions have not yet seen the same reversal in tertiary gender gaps.
+For female tertiary enrollment in 2023, Australia leads at over 125%, followed by North America (~97%), High income (~91%), and the European Union (~89%). South Asia (~33%), Arab World (~35%), and Lower middle income (~27%) have the lowest female tertiary enrollment. For the tertiary gender gap in 2023, nearly all regions show negative values. Australia has the largest female advantage at about -40 percentage points, followed by North America (~-30) and Latin America & Caribbean (~-19). South Asia and Lower middle income are the only groups near zero.
 
 ![Female tertiary enrollment by region (2023)](../figures/female_tertiary_latest_region.png)
 
@@ -224,7 +317,7 @@ For the tertiary gender gap in 2023, nearly all regions show negative values mea
 
 ### Linear Trend Models
 
-To assess whether enrollment rates have changed systematically over time, we fit simple linear regression models with year as the predictor for each gender and education level.
+To assess whether enrollment rates have changed systematically over time, we fit simple linear regression models with year as the predictor for each gender and education level. These models confirm the visual trends — female enrollment shows a positive slope across all three levels, with the steepest increase at the tertiary level. Male enrollment trends are flatter at the primary level and positive at secondary and tertiary, though female slopes are consistently larger, confirming that female enrollment has been growing faster than male enrollment across all education levels.
 
 ```{python}
 #| echo: true
@@ -243,29 +336,64 @@ def run_trend_model(df, outcome, label):
     print("R^2:", round(model.score(X, y), 4))
     print()
 
-# Female enrollment trends
 run_trend_model(primary, "female_enrollment", "Primary female enrollment trend")
 run_trend_model(secondary, "female_enrollment", "Secondary female enrollment trend")
 run_trend_model(tertiary, "female_enrollment", "Tertiary female enrollment trend")
-
-# Male enrollment trends
 run_trend_model(primary, "male_enrollment", "Primary male enrollment trend")
 run_trend_model(secondary, "male_enrollment", "Secondary male enrollment trend")
 run_trend_model(tertiary, "male_enrollment", "Tertiary male enrollment trend")
 ```
 
-## RQ2: Trained Teachers and Enrollment
+## RQ2: Trained Teachers and Secondary Enrollment
+
+To address the second research question, we merged the cleaned trained teacher dataset with the secondary enrollment data on country_code and year, then examined the relationship between the percentage of trained teachers and secondary enrollment rates.
 
 ```{python}
+#| echo: true
+#| eval: false
 
+import seaborn as sns
+from pathlib import Path
+from sklearn.linear_model import LinearRegression
+
+DATA_DIR = Path.cwd().parent / "data" / "cleaned"
+
+secondary = pd.read_csv(DATA_DIR / "secondary_gender_merged.csv")
+teachers = pd.read_csv(DATA_DIR / "total_trained_teachers_secondary_cleaned.csv")
+
+merged = pd.merge(secondary, teachers, on=["country_code", "year"], how="inner")
+
+merged["average_enrollment"] = (
+    merged["male_enrollment"] + merged["female_enrollment"]
+) / 2
 ```
+
+### Relationship Between Trained Teachers and Enrollment
+
+The scatter plot below shows a clear positive relationship between the percentage of trained teachers and average secondary enrollment. Regions with higher proportions of trained teachers tend to have substantially higher secondary enrollment rates. A linear regression model confirms this, with a slope of 1.54, an intercept of -51.17, and an R² of 0.709 — meaning trained teacher percentage explains approximately 71% of the variation in average secondary enrollment across regions and years. The correlation between trained teacher percentage and average enrollment is 0.849, indicating a strong positive association.
+
+![Trained teachers vs average secondary enrollment](../figures/teachers_vs_enrollment.png)
+
+### Trends Over Time
+
+The time-series plot shows that trained teacher percentages and average secondary enrollment have moved in opposite directions for much of the study period. Trained teacher percentages started near 100% in 2000 and declined to around 75% by 2010 before partially recovering. Average secondary enrollment, by contrast, rose steadily from around 61% in 2000 to approximately 90% by 2023. The two lines converge around 2010–2012, after which enrollment continues rising while trained teacher percentages stabilize. This divergence suggests that enrollment growth has not been driven primarily by increases in teacher training rates, and that other factors — such as infrastructure investment, policy changes, and demographic shifts — have also contributed.
+
+![Trends over time: trained teachers and secondary enrollment](../figures/time_trends.png)
+
+### Gender Comparison
+
+When comparing the relationship separately for male and female enrollment, both show a strong positive association with trained teacher percentage. The male regression line sits slightly above the female line at lower trained teacher percentages, suggesting that in regions where a smaller share of teachers are trained, male enrollment tends to be somewhat higher than female enrollment. However, the two lines converge at higher trained teacher percentages, suggesting that as teacher quality improves, the gender gap in secondary enrollment narrows.
+
+![Teacher training vs secondary enrollment by gender](../figures/gender_comparison.png)
 
 # Results and Discussion
 
-[Add summary of key findings from RQ1 and RQ2 here once analysis is complete]
+The analysis reveals two key findings. First, gender gaps in primary and secondary enrollment have narrowed substantially from 2000 to 2023, with the male advantage declining toward zero or reversing entirely by 2023. At the tertiary level, female enrollment has consistently exceeded male enrollment throughout the study period, and this gap has widened dramatically to approximately -16 percentage points by 2023. The fastest gains in female enrollment relative to male occurred in lower-income regions — particularly Africa Western & Central (+145.51% female secondary growth) and South Asia (+359.01% female tertiary growth) — suggesting meaningful progress toward gender parity in these regions.
+
+Second, the proportion of trained teachers in secondary schools is strongly associated with secondary enrollment levels, with a correlation of 0.849 and an R² of 0.709. The gender comparison further suggests that higher trained teacher shares are associated with a narrowing of the secondary gender gap, as male and female enrollment rates converge at higher levels of teacher training. However, the time-series analysis shows that enrollment has grown even as trained teacher percentages declined in some periods, indicating that enrollment is driven by multiple factors beyond teacher training alone.
+
+There are limitations to note. The trained teacher data has substantial missing values, particularly for lower-income regions, which limits the scope of the RQ2 analysis. Additionally, because the analysis uses aggregated regional and income-group data rather than country-level data, within-region variation is obscured.
 
 # Conclusion
 
-This project analyzed gender disparities in school enrollment and the distribution of trained teachers across global regions and income groups from 2000 to 2023. Using data from the World Bank's WDI database, we found that gender gaps in primary and secondary enrollment have narrowed substantially over the study period, while at the tertiary level, female enrollment has consistently exceeded male enrollment and the gap has widened to nearly -16 percentage points by 2023. Regional variation is considerable, with high-income regions showing the largest female tertiary advantage and lower-income regions showing the smallest gaps.
-
-There are certain limitations with our analysis, including the fact that there is missing data for certain years in some of our variables, particularly for the trained teacher indicator. Future work could incorporate country-level data to provide more granular insights, or extend the analysis to include additional indicators such as learning outcomes or government education expenditure.
+This project analyzed gender disparities in school enrollment and the relationship between trained teacher percentages and enrollment across global regions and income groups from 2000 to 2023. We found that gender gaps in primary and secondary enrollment have narrowed substantially, while at the tertiary level, female enrollment has consistently exceeded male enrollment and the gap has widened to nearly -16 percentage points by 2023. The analysis also found a strong positive association between trained teacher percentage and secondary enrollment levels, with an R² of 0.709, and evidence that higher teacher training rates are associated with a narrowing of the secondary gender gap. Future work could incorporate country-level data for more granular insights, or extend the analysis to include additional indicators such as learning outcomes or government education expenditure.
