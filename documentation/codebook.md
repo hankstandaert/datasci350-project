@@ -108,3 +108,106 @@ This dataset enables analysis of enrollment trends and gender differences across
 * Data is aggregated at the regional level, not individual countries
 * Some values are missing depending on region and year
 * Enrollment rates are expressed as gross percentages and may exceed 100% in some cases
+
+---
+## Trained Teacher Dataset
+
+### 1. Dataset Overview
+
+The trained teachers dataset contains the percentage of trained teachers in secondary education from 2000 to 2023. The data is sourced from World Bank education indicators and represents selected geographical regions and income groups, such as South Asia, the European Union, High income, and Low income.
+
+The purpose of this dataset is to analyze:
+
+* Trained teacher percentages over time
+* Compare patterns across regions and income groups
+* Evaluate how teacher training levels vary across the selected groups
+
+---
+
+### 2. Data Sources
+
+The dataset was constructed from one raw CSV file:
+
+* Total trained teachers in secondary education
+
+The file contains yearly trained teacher percentages with years stored as columns for different regions and income groups.
+
+---
+
+### 3. Data Cleaning and Preprocessing
+
+First, the trained teachers dataset was cleaned and transformed.
+
+* Skipped metadata rows using `skiprows=4`
+* Selected relevant columns:
+    * Country Name
+    * Country Code
+    * Indicator Name
+    * Years 2000–2023
+* Removed unnecessary columns such as Indicator Code and years prior to 2000
+* Filtered for the project’s selected regional groups:
+    * AFE, AFW, ARB, AUS, EAS, EUU, LCN, NAC, SAS, LIC, LMC, UMC, HIC
+* Standardized column names and preserved only the needed variables for analysis
+* Kept missing values where data was not reported, since some regions and years did not contain trained teacher observations
+
+---
+
+### 4. Data Transformation
+The data was transformed from wide format, where years were columns, into long format, where years became rows.
+
+* Resulting structure:
+    * one row per country and year, with a single column for trained teacher percentage
+
+The final long-format variables were:
+
+* country_name
+* country_code
+* year
+* trained_teacher
+
+
+---
+
+### 5. Data Integration
+Unlike the enrollment dataset, this dataset came from a single source and did not require merging across multiple files or categories.
+
+The final dataset (total_trained_teachers_secondary_cleaned.csv) contains:
+
+* one row per country and year
+* one column for trained teacher percentage in secondary education
+
+
+---
+
+### 6. Key Variables
+| Column          | Description                                           |
+| ------------    | ----------------------------------------------------- |
+| country_name    | Name of region                                        |
+| country_code    | Region code (e.g., EUU, SAS)                          |
+| year            | Year (2000–2023)                                      |
+| trained_teacher | Percentage of trained teachers in secondary education |
+| male            | Male enrollment rate (%)                              |
+
+---
+
+### 7. Final Dataset Structure
+
+The final dataset is a panel dataset containing:
+
+* 13 regions
+* 24 years (2000–2023)
+* 1 outcome measure: trained teacher percentage
+
+This dataset enables analysis of trained teacher trends across different regions and income groups over time.
+
+---
+
+### 8. Notes and Limitations
+
+* Data is aggregated at the regional or income-group level, not individual countries
+* Some values are missing depending on region and year
+* Missingness is a major limitation since after reshaping, the dataset had 312 country-year rows, but only 126 had non-missing trained teacher values
+
+---
+
+
