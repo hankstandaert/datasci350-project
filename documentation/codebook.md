@@ -201,8 +201,17 @@ The final dataset is a panel dataset containing:
 This dataset enables analysis of trained teacher trends across different regions and income groups over time.
 
 ---
+### 8. Basic descriptive statistics 
 
-### 8. Notes and Limitations
+* Observations: 312 country-year rows
+* Non-missing trained_teacher: 126
+* Mean: 78.67
+* Median: 80.43
+* Min / Max: 45.50/99.86
+
+---
+
+### 9. Notes and Limitations
 
 * Data is aggregated at the regional or income-group level, not individual countries
 * Some values are missing depending on region and year
