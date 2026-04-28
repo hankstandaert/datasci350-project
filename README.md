@@ -26,10 +26,12 @@ datasci350-project/
 │   ├── raw/            # Original downloaded CSVs from World Bank
 │   └── cleaned/        # Cleaned and filtered datasets
 ├── documentation/      # Codebook and entity-relationship diagram
-├── figures/            # Plots and tables from analysis
+├── figures/
+│   ├── plots/          # All graphs (line plots, scatter plots, bar charts)
+│   └── tables/         # DataFrame outputs, summary tables, SQL results
 ├── quarto/             # Quarto report (.qmd, .pdf, .html)
-└── scripts/            # SQL and Python scripts
-    ├── cleaning/       # SQL data cleaning and basic descriptive statistics
+└── scripts/
+    ├── cleaning/       # SQL data cleaning and descriptive statistics
     └── visualization/  # Python visualizations and modeling
 
 ---
