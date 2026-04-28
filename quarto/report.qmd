@@ -12,6 +12,7 @@ format:
   html:
     theme: cosmo
     embed-resources: true
+    fig-align: center
   pdf:
     documentclass: article
     fontsize: 11pt
@@ -70,15 +71,27 @@ Enrollment data for primary, secondary, and tertiary levels was downloaded separ
 
 After assessing the structure of the dataset and the extent of missing values, the data was restricted to observations from 2000 to 2023 and to the selected regional and income-group country codes. The preliminary data file was in wide format and was reshaped into long format with the variables country_name, country_code, year, and trained_teacher using SQLite in Python. The final cleaned file contained 312 country-year observations, of which only 126 had non-missing values for trained_teacher.
 
-![Cleaned long-format structure of the trained teacher dataset](../figures/trained_teacher_trained_structure.png){width=65%}
+::: {.columns}
+::: {.column width="50%"}
+![Dataset structure](../figures/trained_teacher_trained_structure.png){width=100%}
+:::
 
-![Summary of missing values in the trained teacher dataset](../figures/trained_teacher_missing.png){width=65%}
+::: {.column width="50%"}
+![Missing values summary](../figures/trained_teacher_missing.png){width=100%}
+:::
+:::
 
 The histogram of trained teacher percentages shows a distribution concentrated mostly between 55 and 100 percent, with heavier clustering toward the upper end. The mean was 78.67 and the median was 80.43, indicating a mild left skew. The time-series plot showed no clear linear trend — the yearly mean declined from the early 2000s into the early 2010s before recovering in later years. Interestingly, the median falls below the mean in the late 2000s before rising above it around 2015, reflecting a changing distribution of trained teacher percentages over time.
 
-![Histogram of trained teacher percentages with mean and median lines](../figures/trained_teacher_histogram.png){width=65%}
+::: {.columns}
+::: {.column width="50%"}
+![Trained teacher distribution](../figures/trained_teacher_histogram.png){width=100%}
+:::
 
-![Time-series of trained teacher percentages by year](../figures/trained_teacher_trend.png){width=65%}
+::: {.column width="50%"}
+![Trained teacher over time](../figures/trained_teacher_trend.png){width=100%}
+:::
+:::
 
 # Data Analysis
 
@@ -132,9 +145,15 @@ When comparing all three levels together, primary and secondary gaps started pos
 
 ![Gender gap across all education levels](../figures/gender_gap_by_level.png){width=65%}
 
-![Female enrollment rates across all education levels](../figures/female_enrollment_by_level.png){width=65%}
+::: {.columns}
+::: {.column width="50%"}
+![Male enrollment](../figures/male_enrollment_by_level.png){width=100%}
+:::
 
-![Male enrollment rates across all education levels](../figures/male_enrollment_by_level.png){width=65%}
+::: {.column width="50%"}
+![Female enrollment](../figures/female_enrollment_by_level.png){width=100%}
+:::
+:::
 
 ### Regional Breakdown — Tertiary Enrollment (2023)
 
