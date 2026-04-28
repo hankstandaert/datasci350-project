@@ -21,6 +21,7 @@ This project analyzes gender disparities in school enrollment and the relationsh
 
 ## Repository Structure
 
+```
 datasci350-project/
 ├── data/
 │   ├── raw/            # Original downloaded CSVs from World Bank
@@ -33,6 +34,7 @@ datasci350-project/
 └── scripts/
     ├── cleaning/       # SQL data cleaning and descriptive statistics
     └── visualization/  # Python visualizations and modeling
+```
 
 ---
 
