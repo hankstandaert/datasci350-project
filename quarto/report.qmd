@@ -119,25 +119,40 @@ To address the first research question, we analyzed gender-disaggregated enrollm
 
 At the primary level, male gross enrollment has consistently exceeded female enrollment, though the gap has narrowed significantly. In 2000, the gender gap was approximately 7 percentage points, with male enrollment near 100% and female enrollment around 93%. The gap declined steadily through 2016, reaching a low of about 0.6 percentage points, before stabilizing at roughly 1.5 points by 2023.
 
-![Primary school enrollment trends by gender (2000–2023)](../figures/primary_gender_trends.png){width=65%}
-
-![Gender gap in primary enrollment over time](../figures/primary_gap_trend.png){width=65%}
+::: {.columns}
+::: {.column width="50%"}
+![Primary school enrollment trends by gender (2000–2023)](../figures/primary_gender_trends.png)
+:::
+::: {.column width="50%"}
+![Gender gap in primary enrollment over time](../figures/primary_gap_trend.png)
+:::
+:::
 
 ### Secondary Enrollment
 
 Secondary enrollment shows strong growth for both genders. Male enrollment rose from approximately 63% in 2000 to around 83% by 2023, while female enrollment grew from roughly 59% to nearly 90%. The gender gap started at about 3.8 percentage points in 2000 and declined steadily, dipping below zero by 2023 — meaning female secondary enrollment has now slightly surpassed male enrollment globally.
 
-![Secondary school enrollment trends by gender (2000–2023)](../figures/secondary_gender_trends.png){width=65%}
-
-![Gender gap in secondary enrollment over time](../figures/secondary_gap_trend.png){width=65%}
+::: {.columns}
+::: {.column width="50%"}
+![Secondary school enrollment trends by gender (2000–2023)](../figures/secondary_gender_trends.png)
+:::
+::: {.column width="50%"}
+![Gender gap in secondary enrollment over time](../figures/secondary_gap_trend.png)
+:::
+:::
 
 ### Tertiary Enrollment
 
 At the tertiary level, female enrollment has exceeded male enrollment throughout the entire study period and the gap has been widening rapidly. In 2000, the gap was already about -2 percentage points (females ahead), with both genders at around 23–25%. By 2023, female enrollment reached approximately 71% compared to male enrollment of around 56%, with the gap widening to nearly -16 percentage points.
 
-![Tertiary school enrollment trends by gender (2000–2023)](../figures/tertiary_gender_trends.png){width=65%}
-
-![Gender gap in tertiary enrollment over time](../figures/tertiary_gap_trend.png){width=65%}
+::: {.columns}
+::: {.column width="50%"}
+![Tertiary school enrollment trends by gender (2000–2023)](../figures/tertiary_gender_trends.png)
+:::
+::: {.column width="50%"}
+![Gender gap in tertiary enrollment over time](../figures/tertiary_gap_trend.png)
+:::
+:::
 
 ### Gender Gap Across All Education Levels
 
@@ -159,9 +174,14 @@ When comparing all three levels together, primary and secondary gaps started pos
 
 For female tertiary enrollment in 2023, Australia leads at over 125%, followed by North America (~97%), High income (~91%), and the European Union (~89%). South Asia (~33%), Arab World (~35%), and Lower middle income (~27%) have the lowest female tertiary enrollment. For the tertiary gender gap in 2023, nearly all regions show negative values. Australia has the largest female advantage at about -40 percentage points, followed by North America (~-30) and Latin America & Caribbean (~-19). South Asia and Lower middle income are the only groups near zero.
 
-![Female tertiary enrollment by region (2023)](../figures/female_tertiary_latest_region.png){width=65%}
-
-![Tertiary gender gap by region (2023)](../figures/tertiary_gap_latest_region.png){width=65%}
+::: {.columns}
+::: {.column width="50%"}
+![Female tertiary enrollment by region (2023)](../figures/female_tertiary_latest_region.png)
+:::
+::: {.column width="50%"}
+![Tertiary gender gap by region (2023)](../figures/tertiary_gap_latest_region.png)
+:::
+:::
 
 ### Linear Trend Models
 
@@ -203,8 +223,8 @@ The relationship between teacher training and enrollment is also positive. Regio
 
 This project analyzed gender disparities in school enrollment and the relationship between trained teacher percentages and enrollment across global regions and income groups from 2000 to 2023. We found that gender gaps in primary and secondary enrollment have narrowed substantially, while at the tertiary level, female enrollment has consistently exceeded male enrollment and the gap has widened to nearly -16 percentage points by 2023. The analysis also found a strong positive association between trained teacher percentage and secondary enrollment levels, with an R² of 0.709, and evidence that higher teacher training rates are associated with a narrowing of the secondary gender gap. Future work could incorporate country-level data for more granular insights, or extend the analysis to include additional indicators such as learning outcomes or government education expenditure. It would also be valuable to delve into the effects of specific programs designed to increase enrollment to explore how they can be improved.
 
-
 # Citations
+
 World Bank. "Education Statistics — All Indicators." DataBank, World Bank Group, https://databank.worldbank.org/source/education-statistics-%5E-all-indicators.
 Wang, Feng, et al. "An Empirical Analysis of the Impact of Higher Education on Economic Growth: The Case of China." PLOS ONE, 2022, https://pmc.ncbi.nlm.nih.gov/articles/PMC9435527/.
 Pholphirul, Piriya. "Teacher Shortages and Educational Outcomes in Developing Countries: Empirical Evidence from PISA-Thailand." Cogent Education, 2023, https://www.tandfonline.com/doi/full/10.1080/2331186X.2023.2243126.
