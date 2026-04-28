@@ -64,55 +64,6 @@ The following 13 regional and income groupings are included in the analysis:
 
 Enrollment data for primary, secondary, and tertiary levels was downloaded separately for male and female students from the World Bank WDI database. Each file was loaded into Python, filtered to include only the 13 target region/income codes and years 2000–2023, and reshaped from wide format into long format using SQL via SQLite in Python. Male and female tables were then merged on `country_code` and `year` to produce a single merged dataset for each education level. The process was repeated identically for primary, secondary, and tertiary enrollment.
 
-```{python}
-#| echo: true
-#| eval: false
-
-import pandas as pd
-import sqlite3
-
-conn = sqlite3.connect("data/education.db")
-
-df_female = pd.read_csv(
-    "data/raw/enrollment/SECONDARY_Female_School_Enrollment_DATA.csv",
-    skiprows=4
-)
-df_female.to_sql("secondary_female_raw", conn, if_exists="replace", index=False)
-
-conn.executescript("""
-CREATE TABLE secondary_female_clean AS
-SELECT
-    "Country Name" AS country_name,
-    "Country Code" AS country_code,
-    "2000","2001","2002","2003","2004","2005","2006","2007","2008","2009",
-    "2010","2011","2012","2013","2014","2015","2016","2017","2018","2019",
-    "2020","2021","2022","2023"
-FROM secondary_female_raw
-WHERE "Country Code" IN (
-    'AFE','AFW','ARB','AUS','EAS','EUU','LCN','NAC','SAS',
-    'LIC','LMC','UMC','HIC'
-);
-""")
-
-conn.executescript("""
-DROP TABLE IF EXISTS secondary_gender_merged;
-CREATE TABLE secondary_gender_merged AS
-SELECT
-    m.country_name,
-    m.country_code,
-    m.year,
-    m.male_enrollment,
-    f.female_enrollment
-FROM male_long_sql m
-JOIN female_long_sql f
-    ON m.country_code = f.country_code
-    AND m.year = f.year;
-""")
-
-df = pd.read_sql("SELECT * FROM secondary_gender_merged;", conn)
-df.to_csv("data/cleaned/secondary_gender_merged.csv", index=False)
-```
-
 ## Data Cleaning — Trained Teacher Data
 
 After assessing the structure of the dataset and the extent of missing values, the data was restricted to observations from 2000 to 2023 and to the selected regional and income-group country codes. The preliminary data file was in wide format and was reshaped into long format with the variables country_name, country_code, year, and trained_teacher using SQLite in Python. The final cleaned file contained 312 country-year observations, of which only 126 had non-missing values for trained_teacher.
@@ -133,104 +84,11 @@ The histogram of trained teacher percentages shows a distribution concentrated m
 
 Before conducting the full analysis, we used SQL queries via SQLite in Python to compute descriptive statistics across all three education levels combined.
 
-```{python}
-#| echo: true
-#| eval: false
-
-import pandas as pd
-import sqlite3
-
-conn = sqlite3.connect(":memory:")
-df_total.to_sql("all_enrollment", conn, index=False, if_exists="replace")
-
-# Average male and female enrollment by level
-pd.read_sql("""
-SELECT level,
-       AVG(male) AS avg_male,
-       AVG(female) AS avg_female
-FROM all_enrollment
-GROUP BY level;
-""", conn)
-
-# Gender gap by level
-pd.read_sql("""
-SELECT level,
-       AVG(female - male) AS gender_gap
-FROM all_enrollment
-GROUP BY level;
-""", conn)
-```
-
 The SQL queries reveal clear differences across education levels. At the primary level, average male enrollment (101.45%) slightly exceeds female enrollment (98.45%), producing a small average gender gap of -3.01 percentage points (female minus male). At the secondary level, average male enrollment (75.21%) again slightly exceeds female (72.99%), with an average gap of -2.22 points. At the tertiary level, the pattern reverses — female enrollment (41.57%) substantially exceeds male enrollment (34.91%), with an average gap of +6.65 percentage points in favor of females.
 
 ### Enrollment Percentage Change from 2000 to 2023
 
 We also computed the percentage change in male and female enrollment from 2000 to 2023 for each region and education level using SQL.
-
-```{python}
-#| echo: true
-#| eval: false
-
-# Primary Enrollment Percentage Change from 2000 to 2023
-pd.read_sql("""
-SELECT
-    country_code,
-    ROUND(
-        (MAX(CASE WHEN year = '2023' THEN male END) -
-         MAX(CASE WHEN year = '2000' THEN male END)) * 100.0 /
-         MAX(CASE WHEN year = '2000' THEN male END), 2
-    ) AS male_pct_change,
-    ROUND(
-        (MAX(CASE WHEN year = '2023' THEN female END) -
-         MAX(CASE WHEN year = '2000' THEN female END)) * 100.0 /
-         MAX(CASE WHEN year = '2000' THEN female END), 2
-    ) AS female_pct_change
-FROM all_enrollment
-WHERE level = 'primary'
-GROUP BY country_code
-ORDER BY female_pct_change DESC;
-""", conn)
-
-# Secondary Enrollment Percentage Change from 2000 to 2023
-pd.read_sql("""
-SELECT
-    country_code,
-    ROUND(
-        (MAX(CASE WHEN year = '2023' THEN male END) -
-         MAX(CASE WHEN year = '2000' THEN male END)) * 100.0 /
-         MAX(CASE WHEN year = '2000' THEN male END), 2
-    ) AS male_pct_change,
-    ROUND(
-        (MAX(CASE WHEN year = '2023' THEN female END) -
-         MAX(CASE WHEN year = '2000' THEN female END)) * 100.0 /
-         MAX(CASE WHEN year = '2000' THEN female END), 2
-    ) AS female_pct_change
-FROM all_enrollment
-WHERE level = 'secondary'
-GROUP BY country_code
-ORDER BY female_pct_change DESC;
-""", conn)
-
-# Tertiary Enrollment Percentage Change from 2000 to 2023
-pd.read_sql("""
-SELECT
-    country_code,
-    ROUND(
-        (MAX(CASE WHEN year = '2023' THEN male END) -
-         MAX(CASE WHEN year = '2000' THEN male END)) * 100.0 /
-         MAX(CASE WHEN year = '2000' THEN male END), 2
-    ) AS male_pct_change,
-    ROUND(
-        (MAX(CASE WHEN year = '2023' THEN female END) -
-         MAX(CASE WHEN year = '2000' THEN female END)) * 100.0 /
-         MAX(CASE WHEN year = '2000' THEN female END), 2
-    ) AS female_pct_change
-FROM all_enrollment
-WHERE level = 'tertiary'
-GROUP BY country_code
-ORDER BY female_pct_change DESC;
-""", conn)
-```
 
 At the primary level, the largest female enrollment gains occurred in low-income regions — Low income (LIC) saw a 54.01% increase in female enrollment compared to 29.87% for males. Africa Eastern & Southern (AFE) saw a 34.71% female increase versus 22.20% for males, and Africa Western & Central (AFW) saw a 24.95% female increase versus only 3.26% for males. High-income regions saw small declines, consistent with already near-universal enrollment.
 
@@ -241,36 +99,6 @@ At the tertiary level, growth was dramatic across all regions. Upper middle inco
 ## RQ1: Male vs. Female Enrollment Across Regions and Education Levels
 
 To address the first research question, we analyzed gender-disaggregated enrollment rates across primary, secondary, and tertiary education from 2000 to 2023. A gender gap variable was computed as male enrollment minus female enrollment, where positive values indicate higher male enrollment and negative values indicate higher female enrollment.
-
-```{python}
-#| echo: true
-#| eval: false
-
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from pathlib import Path
-from sklearn.linear_model import LinearRegression
-
-ROOT = Path.cwd().parent
-DATA_DIR = ROOT / "data" / "cleaned"
-FIG_DIR = ROOT / "figures"
-
-primary = pd.read_csv(DATA_DIR / "primary_gender_merged.csv")
-secondary = pd.read_csv(DATA_DIR / "secondary_gender_merged.csv")
-tertiary = pd.read_csv(DATA_DIR / "tertiary_gender_merged.csv")
-
-for df in [primary, secondary, tertiary]:
-    df["year"] = pd.to_numeric(df["year"], errors="coerce")
-    df["male_enrollment"] = pd.to_numeric(df["male_enrollment"], errors="coerce")
-    df["female_enrollment"] = pd.to_numeric(df["female_enrollment"], errors="coerce")
-    df["gender_gap"] = df["male_enrollment"] - df["female_enrollment"]
-
-primary["level"] = "Primary"
-secondary["level"] = "Secondary"
-tertiary["level"] = "Tertiary"
-combined = pd.concat([primary, secondary, tertiary], ignore_index=True)
-```
 
 ### Primary Enrollment
 
@@ -346,26 +174,6 @@ run_trend_model(tertiary, "male_enrollment", "Tertiary male enrollment trend")
 ## RQ2: Trained Teachers and Secondary Enrollment
 
 To address the second research question, we merged the cleaned trained teacher dataset with the secondary enrollment data on country_code and year, then examined the relationship between the percentage of trained teachers and secondary enrollment rates.
-
-```{python}
-#| echo: true
-#| eval: false
-
-import seaborn as sns
-from pathlib import Path
-from sklearn.linear_model import LinearRegression
-
-DATA_DIR = Path.cwd().parent / "data" / "cleaned"
-
-secondary = pd.read_csv(DATA_DIR / "secondary_gender_merged.csv")
-teachers = pd.read_csv(DATA_DIR / "total_trained_teachers_secondary_cleaned.csv")
-
-merged = pd.merge(secondary, teachers, on=["country_code", "year"], how="inner")
-
-merged["average_enrollment"] = (
-    merged["male_enrollment"] + merged["female_enrollment"]
-) / 2
-```
 
 ### Relationship Between Trained Teachers and Enrollment
 
