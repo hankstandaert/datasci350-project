@@ -146,31 +146,6 @@ For female tertiary enrollment in 2023, Australia leads at over 125%, followed b
 
 To assess whether enrollment rates have changed systematically over time, we fit simple linear regression models with year as the predictor for each gender and education level. These models confirm the visual trends — female enrollment shows a positive slope across all three levels, with the steepest increase at the tertiary level. Male enrollment trends are flatter at the primary level and positive at secondary and tertiary, though female slopes are consistently larger, confirming that female enrollment has been growing faster than male enrollment across all education levels.
 
-```{python}
-#| echo: true
-#| eval: false
-
-def run_trend_model(df, outcome, label):
-    model_df = df.dropna(subset=["year", outcome]).copy()
-    yearly = model_df.groupby("year")[outcome].mean().reset_index()
-    X = yearly[["year"]]
-    y = yearly[outcome]
-    model = LinearRegression()
-    model.fit(X, y)
-    print(label)
-    print("Slope:", round(model.coef_[0], 4))
-    print("Intercept:", round(model.intercept_, 4))
-    print("R^2:", round(model.score(X, y), 4))
-    print()
-
-run_trend_model(primary, "female_enrollment", "Primary female enrollment trend")
-run_trend_model(secondary, "female_enrollment", "Secondary female enrollment trend")
-run_trend_model(tertiary, "female_enrollment", "Tertiary female enrollment trend")
-run_trend_model(primary, "male_enrollment", "Primary male enrollment trend")
-run_trend_model(secondary, "male_enrollment", "Secondary male enrollment trend")
-run_trend_model(tertiary, "male_enrollment", "Tertiary male enrollment trend")
-```
-
 ## RQ2: Trained Teachers and Secondary Enrollment
 
 To address the second research question, we merged the cleaned trained teacher dataset with the secondary enrollment data on country_code and year, then examined the relationship between the percentage of trained teachers and secondary enrollment rates.
