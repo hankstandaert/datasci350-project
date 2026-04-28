@@ -2,7 +2,7 @@
 
 ### 1. Dataset Overview
 
-The enrollment dataset contains school enrollment rates for primary, secondary, and tertiary education from 2000 to 2023. The data is sourced from World Bank education indicators and represents different geographical regions (SOuth Asia, European Union, etc) and economical regions (High, Middle and Low Income).
+The enrollment dataset contains school enrollment rates for primary, secondary, and tertiary education from 2000 to 2023. The data is sourced from World Bank education indicators and represents different geographical regions (South Asia, European Union, etc) and economic regions (High, Middle and Low Income).
 
 The purpose of this dataset is to analyze:
 
@@ -20,7 +20,7 @@ The dataset was constructed from six raw CSV files:
 * Secondary School Enrollment (male and female)
 * Tertiary School Enrollment (male and female)
 
-Each file contains yearly enrollment rates with years as columns for numerous different regions and countries.
+Each file contains yearly enrollment rates with years as columns for multiple regions and countries.
 
 ---
 
@@ -35,12 +35,12 @@ First we had to clean and transform our enrollment dataset.
   * Country Code
   * Indicator Name
   * Years 2000–2023
-* Removed unnecessary columns such as indicatory code and years prior to 2000
+* Removed unnecessary columns such as indicator code and years prior to 2000
 
 * Filtered for our project's selected regional groups:
   * AFE, AFW, ARB, AUS, EAS, EUU, LCN, NAC, SAS, LIC, LMC, UMC, HIC
-* Fixed any whitespace inconsisencies in the country codes and names using. This was also used to standardize the column names
-`TRIM ("Country Code") AS country_code`
+* Fixed any whitespace inconsisencies in the country codes and names using, which also helped to standardize the column names
+`TRIM("Country Code") AS country_code`
 
 * Removed rows with all missing values across selected years
 
@@ -144,11 +144,11 @@ First, the trained teachers dataset was cleaned and transformed.
     * Country Code
     * Indicator Name
     * Years 2000–2023
-* Removed unnecessary columns such as Indicator Code and years prior to 2000
+* Removed unnecessary columns, including the indicator code and data from years prior to 2000
 * Filtered for the project’s selected regional groups:
     * AFE, AFW, ARB, AUS, EAS, EUU, LCN, NAC, SAS, LIC, LMC, UMC, HIC
 * Standardized column names and preserved only the needed variables for analysis
-* Kept missing values where data was not reported, since some regions and years did not contain trained teacher observations
+* Retained missing values where data was not reported, since some regions and years did not contain trained teacher observations
 
 ---
 
@@ -186,7 +186,6 @@ The final dataset (total_trained_teachers_secondary_cleaned.csv) contains:
 | country_code    | Region code (e.g., EUU, SAS)                          |
 | year            | Year (2000–2023)                                      |
 | trained_teacher | Percentage of trained teachers in secondary education |
-| male            | Male enrollment rate (%)                              |
 
 ---
 
