@@ -15,7 +15,7 @@ This project analyzes gender disparities in school enrollment and the relationsh
 
 **Research Questions:**
 1. How do male vs. female school enrollment rates compare across global regions (primary, secondary, and tertiary) from 2000–2023?
-2. How does the percentage of trained teachers in secondary schools affect student persistence/completion rates across regions?
+2. How does the percentage of trained teachers affect enrollment in secondary schools??
 
 ---
 
@@ -23,12 +23,14 @@ This project analyzes gender disparities in school enrollment and the relationsh
 
 datasci350-project/
 ├── data/
-│   ├── raw/          # Original downloaded CSVs from World Bank
-│   └── cleaned/      # Cleaned and filtered datasets
-├── docs/             # Codebook and entity-relationship diagram
-├── figures/          # Plots and tables from analysis
-├── quarto/           # Quarto report (.qmd, .pdf, .html)
-└── scripts/          # SQL and Python scripts
+│   ├── raw/            # Original downloaded CSVs from World Bank
+│   └── cleaned/        # Cleaned and filtered datasets
+├── documentation/      # Codebook and entity-relationship diagram
+├── figures/            # Plots and tables from analysis
+├── quarto/             # Quarto report (.qmd, .pdf, .html)
+└── scripts/            # SQL and Python scripts
+    ├── cleaning/       # SQL data cleaning and basic descriptive statistics
+    └── visualization/  # Python visualizations and modeling
 
 ---
 
