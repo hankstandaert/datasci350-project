@@ -70,15 +70,15 @@ Enrollment data for primary, secondary, and tertiary levels was downloaded separ
 
 After assessing the structure of the dataset and the extent of missing values, the data was restricted to observations from 2000 to 2023 and to the selected regional and income-group country codes. The preliminary data file was in wide format and was reshaped into long format with the variables country_name, country_code, year, and trained_teacher using SQLite in Python. The final cleaned file contained 312 country-year observations, of which only 126 had non-missing values for trained_teacher.
 
-![Cleaned long-format structure of the trained teacher dataset](../figures/trained_teacher_trained_structure.png)
+![Cleaned long-format structure of the trained teacher dataset](../figures/trained_teacher_trained_structure.png){width=65%}
 
-![Summary of missing values in the trained teacher dataset](../figures/trained_teacher_missing.png)
+![Summary of missing values in the trained teacher dataset](../figures/trained_teacher_missing.png){width=65%}
 
 The histogram of trained teacher percentages shows a distribution concentrated mostly between 55 and 100 percent, with heavier clustering toward the upper end. The mean was 78.67 and the median was 80.43, indicating a mild left skew. The time-series plot showed no clear linear trend — the yearly mean declined from the early 2000s into the early 2010s before recovering in later years. Interestingly, the median falls below the mean in the late 2000s before rising above it around 2015, reflecting a changing distribution of trained teacher percentages over time.
 
-![Histogram of trained teacher percentages with mean and median lines](../figures/trained_teacher_histogram.png)
+![Histogram of trained teacher percentages with mean and median lines](../figures/trained_teacher_histogram.png){width=65%}
 
-![Time-series of trained teacher percentages by year](../figures/trained_teacher_trend.png)
+![Time-series of trained teacher percentages by year](../figures/trained_teacher_trend.png){width=65%}
 
 # Data Analysis
 
@@ -106,43 +106,43 @@ To address the first research question, we analyzed gender-disaggregated enrollm
 
 At the primary level, male gross enrollment has consistently exceeded female enrollment, though the gap has narrowed significantly. In 2000, the gender gap was approximately 7 percentage points, with male enrollment near 100% and female enrollment around 93%. The gap declined steadily through 2016, reaching a low of about 0.6 percentage points, before stabilizing at roughly 1.5 points by 2023.
 
-![Primary school enrollment trends by gender (2000–2023)](../figures/primary_gender_trends.png)
+![Primary school enrollment trends by gender (2000–2023)](../figures/primary_gender_trends.png){width=65%}
 
-![Gender gap in primary enrollment over time](../figures/primary_gap_trend.png)
+![Gender gap in primary enrollment over time](../figures/primary_gap_trend.png){width=65%}
 
 ### Secondary Enrollment
 
 Secondary enrollment shows strong growth for both genders. Male enrollment rose from approximately 63% in 2000 to around 83% by 2023, while female enrollment grew from roughly 59% to nearly 90%. The gender gap started at about 3.8 percentage points in 2000 and declined steadily, dipping below zero by 2023 — meaning female secondary enrollment has now slightly surpassed male enrollment globally.
 
-![Secondary school enrollment trends by gender (2000–2023)](../figures/secondary_gender_trends.png)
+![Secondary school enrollment trends by gender (2000–2023)](../figures/secondary_gender_trends.png){width=65%}
 
-![Gender gap in secondary enrollment over time](../figures/secondary_gap_trend.png)
+![Gender gap in secondary enrollment over time](../figures/secondary_gap_trend.png){width=65%}
 
 ### Tertiary Enrollment
 
 At the tertiary level, female enrollment has exceeded male enrollment throughout the entire study period and the gap has been widening rapidly. In 2000, the gap was already about -2 percentage points (females ahead), with both genders at around 23–25%. By 2023, female enrollment reached approximately 71% compared to male enrollment of around 56%, with the gap widening to nearly -16 percentage points.
 
-![Tertiary school enrollment trends by gender (2000–2023)](../figures/tertiary_gender_trends.png)
+![Tertiary school enrollment trends by gender (2000–2023)](../figures/tertiary_gender_trends.png){width=65%}
 
-![Gender gap in tertiary enrollment over time](../figures/tertiary_gap_trend.png)
+![Gender gap in tertiary enrollment over time](../figures/tertiary_gap_trend.png){width=65%}
 
 ### Gender Gap Across All Education Levels
 
 When comparing all three levels together, primary and secondary gaps started positive and have converged toward zero, while the tertiary gap has accelerated downward to about -15 percentage points by 2023. This suggests that while gender disparities in basic education are narrowing, a new and growing gap has emerged at the tertiary level in favor of women.
 
-![Gender gap across all education levels](../figures/gender_gap_by_level.png)
+![Gender gap across all education levels](../figures/gender_gap_by_level.png){width=65%}
 
-![Female enrollment rates across all education levels](../figures/female_enrollment_by_level.png)
+![Female enrollment rates across all education levels](../figures/female_enrollment_by_level.png){width=65%}
 
-![Male enrollment rates across all education levels](../figures/male_enrollment_by_level.png)
+![Male enrollment rates across all education levels](../figures/male_enrollment_by_level.png){width=65%}
 
 ### Regional Breakdown — Tertiary Enrollment (2023)
 
 For female tertiary enrollment in 2023, Australia leads at over 125%, followed by North America (~97%), High income (~91%), and the European Union (~89%). South Asia (~33%), Arab World (~35%), and Lower middle income (~27%) have the lowest female tertiary enrollment. For the tertiary gender gap in 2023, nearly all regions show negative values. Australia has the largest female advantage at about -40 percentage points, followed by North America (~-30) and Latin America & Caribbean (~-19). South Asia and Lower middle income are the only groups near zero.
 
-![Female tertiary enrollment by region (2023)](../figures/female_tertiary_latest_region.png)
+![Female tertiary enrollment by region (2023)](../figures/female_tertiary_latest_region.png){width=65%}
 
-![Tertiary gender gap by region (2023)](../figures/tertiary_gap_latest_region.png)
+![Tertiary gender gap by region (2023)](../figures/tertiary_gap_latest_region.png){width=65%}
 
 ### Linear Trend Models
 
@@ -156,19 +156,19 @@ To address the second research question, we merged the cleaned trained teacher d
 
 The scatter plot below shows a clear positive relationship between the percentage of trained teachers and average secondary enrollment. Regions with higher proportions of trained teachers tend to have substantially higher secondary enrollment rates. A linear regression model confirms this, with a slope of 1.54, an intercept of -51.17, and an R² of 0.709 — meaning trained teacher percentage explains approximately 71% of the variation in average secondary enrollment across regions and years. The correlation between trained teacher percentage and average enrollment is 0.849, indicating a strong positive association.
 
-![Trained teachers vs average secondary enrollment](../figures/teachers_vs_enrollment.png)
+![Trained teachers vs average secondary enrollment](../figures/teachers_vs_enrollment.png){width=65%}
 
 ### Trends Over Time
 
 The time-series plot shows that trained teacher percentages and average secondary enrollment have moved in opposite directions for much of the study period. Trained teacher percentages started near 100% in 2000 and declined to around 75% by 2010 before partially recovering. Average secondary enrollment, by contrast, rose steadily from around 61% in 2000 to approximately 90% by 2023. The two lines converge around 2010–2012, after which enrollment continues rising while trained teacher percentages stabilize. This divergence suggests that enrollment growth has not been driven primarily by increases in teacher training rates, and that other factors — such as infrastructure investment, policy changes, and demographic shifts — have also contributed.
 
-![Trends over time: trained teachers and secondary enrollment](../figures/time_trends.png)
+![Trends over time: trained teachers and secondary enrollment](../figures/time_trends.png){width=65%}
 
 ### Gender Comparison
 
 When comparing the relationship separately for male and female enrollment, both show a strong positive association with trained teacher percentage. The male regression line sits slightly above the female line at lower trained teacher percentages, suggesting that in regions where a smaller share of teachers are trained, male enrollment tends to be somewhat higher than female enrollment. However, the two lines converge at higher trained teacher percentages, suggesting that as teacher quality improves, the gender gap in secondary enrollment narrows.
 
-![Teacher training vs secondary enrollment by gender](../figures/gender_comparison.png)
+![Teacher training vs secondary enrollment by gender](../figures/gender_comparison.png){width=65%}
 
 # Results and Discussion
 
